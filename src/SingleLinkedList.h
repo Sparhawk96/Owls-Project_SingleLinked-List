@@ -196,10 +196,26 @@ T* SingleLinkedList<T>::last() {
 
 /* Misc methods */
 
+/*
+* Finds an elements position within the list.
+* element - Element to find location.
+* Returns a -1 if the element was not found in the list.
+*/
 template <class T>
 int SingleLinkedList<T>::indexOf(T* element) {
+	Node<T>* currentNode = head;
+	int loc = 0;
+
+	while (currentNode != NULL  && *(currentNode->data) != *element) {
+		currentNode = currentNode->next;
+		loc++;
+	}
+
 	cout << "Retriving index of Element (" << *element << ")." << endl;
-	return 0;
+	if (currentNode == NULL)
+		return -1;
+	else
+		return loc;
 }
 
 template <class T>
