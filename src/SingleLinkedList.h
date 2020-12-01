@@ -15,7 +15,8 @@ class SingleLinkedList
 {
 private:
 	int size;
-	Node<int> head;
+	Node<int>* head;
+	Node<int>* tail;
 public:
 	//Constructor
 	SingleLinkedList();
@@ -55,6 +56,9 @@ public:
 
 template <class T>
 SingleLinkedList<T>::SingleLinkedList() {
+	this->size = 0;
+	this->head = NULL;
+	this->tail = NULL;
 	cout << "Created a List" << endl;
 };
 
