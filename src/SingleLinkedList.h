@@ -152,9 +152,8 @@ T* SingleLinkedList<T>::remove(T* element) {
 
 		Node<T>* remove = currentNode->next;
 		T* placeHolder = remove->data;
-		delete remove;
-
 		currentNode->next = currentNode->next->next;
+		delete remove;
 
 		cout << "Removed Element (" << *element << ") from list." << endl;
 		return placeHolder;
