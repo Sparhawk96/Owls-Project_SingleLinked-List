@@ -102,8 +102,36 @@ void SingleLinkedList<T>::add(int index, T* element) {
 	cout << "Added Element (" << *element << ") after this index: " << index << endl;
 }
 
+/*
+* Adds an element after the target provided.
+* element - Element to add after target provided.
+* target - Target to add element after.
+* throws a const char* exception when the target 
+* isn't found within the list.
+*/
 template <class T>
 void SingleLinkedList<T>::addAfter(T* element, T* target) {
+	Node<T>* currentNode = head;
+	bool foundIt = false;
+
+	while (currentNode != NULL && !foundIt) {
+		if (*(currentNode->data) == *target)
+			foundIt = true;
+		else
+			currentNode = currentNode->next;
+	}
+
+	if (!foundIt)
+		throw "ERROR: The element wasn't found in the list.";
+
+	Node<T>* newNode = new Node<T>(element, currentNode->next);
+	currentNode->next = newNode;
+
+	size++;
+
+	if (currentNode == tail)
+		tail = newNode;
+
 	cout << "Added Element (" << *element << ") after: " << *target << endl;
 }
 
@@ -124,7 +152,8 @@ T* SingleLinkedList<T>::removeLast() {
 /*
 * Removes an element from the list.
 * element - Element to remove from the list.
-* Throws a const char* exception.
+* Throws a const char* exception if list is empty 
+* or element wasn't found in the list.
 */
 template <class T>
 T* SingleLinkedList<T>::remove(T* element) {
