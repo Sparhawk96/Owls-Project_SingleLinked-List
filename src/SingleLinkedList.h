@@ -8,6 +8,11 @@ template <class T>
 struct Node {
 	T* data;
 	Node<T>* next;
+	
+	Node(T* element, Node<T>* next) {
+		this->data = element;
+		this->next = next;
+	}
 };
 
 template <class T>
@@ -15,8 +20,8 @@ class SingleLinkedList
 {
 private:
 	int size;
-	Node<int>* head;
-	Node<int>* tail;
+	Node<T>* head;
+	Node<T>* tail;
 public:
 	//Constructor
 	SingleLinkedList();
@@ -66,6 +71,15 @@ SingleLinkedList<T>::SingleLinkedList() {
 
 template <class T>
 void SingleLinkedList<T>::addToFront(T* element) {
+	Node<T>* node = new Node<T>(element, NULL);
+	node->next = head;
+	head = node;
+
+	if (size == 0) {
+		tail = head;
+	}
+
+	size++;
 	cout << "Added Element (" << *element << ") to the front." << endl;
 }
 
