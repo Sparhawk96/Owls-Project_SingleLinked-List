@@ -8,6 +8,11 @@ template <class T>
 struct Node {
 	T* data;
 	Node<T>* next;
+	
+	Node(T* element, Node<T>* next) {
+		this->data = element;
+		this->next = next;
+	}
 };
 
 template <class T>
@@ -15,8 +20,8 @@ class SingleLinkedList
 {
 private:
 	int size;
-	Node<int>* head;
-	Node<int>* tail;
+	Node<T>* head;
+	Node<T>* tail;
 public:
 	//Constructor
 	SingleLinkedList();
@@ -52,7 +57,7 @@ public:
 	~SingleLinkedList();
 };
 
-/* Construtor */
+/* Constructor */
 
 template <class T>
 SingleLinkedList<T>::SingleLinkedList() {
@@ -64,8 +69,21 @@ SingleLinkedList<T>::SingleLinkedList() {
 
 /* Adding methods */
 
+/*
+* Adds an element to the front of the list.
+* element - Element to add to the front of the list.
+*/
 template <class T>
 void SingleLinkedList<T>::addToFront(T* element) {
+	Node<T>* node = new Node<T>(element, NULL);
+	node->next = head;
+	head = node;
+
+	if (size == 0) {
+		tail = head;
+	}
+
+	size++;
 	cout << "Added Element (" << *element << ") to the front." << endl;
 }
 
@@ -103,10 +121,43 @@ T* SingleLinkedList<T>::removeLast() {
 	return NULL;
 }
 
+/*
+* Removes an element from the list.
+* element - Element to remove from the list.
+* Throws a const char* exception.
+*/
 template <class T>
 T* SingleLinkedList<T>::remove(T* element) {
-	cout << "Removed Element (" << *element << ") from list." << endl;
-	return NULL;
+	if (size == 0) {
+		throw "ERROR: List is Empty.";
+	}else if (*(head->data) == *element) {
+		return removeFirst();
+	}else if (*(tail->data) == *element) {
+		return removeLast();
+	}else {
+		Node<T>* currentNode = head;
+		bool foundIt = false;
+
+		while (!foundIt && currentNode->next != NULL) {
+			if (*(currentNode->next->data) == *element)
+				foundIt = true;
+			else
+				currentNode = currentNode->next;
+		}
+
+		if (!foundIt)
+			throw "ERROR: The element wasn't found in the list.";
+
+		size--;
+
+		Node<T>* remove = currentNode->next;
+		T* placeHolder = remove->data;
+		currentNode->next = currentNode->next->next;
+		delete remove;
+
+		cout << "Removed Element (" << *element << ") from list." << endl;
+		return placeHolder;
+	}
 }
 
 template <class T>
