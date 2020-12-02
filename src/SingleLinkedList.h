@@ -266,8 +266,18 @@ int SingleLinkedList<T>::getSize() {
 
 /* Delete method */
 
+/*
+* Deletes this list preventing memory leakage.
+*/
 template <class T>
 SingleLinkedList<T>::~SingleLinkedList() {
+	Node<T>* currentNode = head;
+	while (currentNode != NULL) {
+		Node<T>* prev = currentNode;
+		currentNode = currentNode->next;
+		delete prev->data;
+		delete prev;
+	}
 	cout << "List is being destroyed" << endl;
 }
 
