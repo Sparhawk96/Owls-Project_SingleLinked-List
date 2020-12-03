@@ -87,6 +87,10 @@ void SingleLinkedList<T>::addToFront(T* element) {
 	cout << "Added Element (" << *element << ") to the front." << endl;
 }
 
+/*
+* Adds an element to the rear of a list and sets tail to new element.
+* element - Element to be added to the rear.
+*/
 template <class T>
 void SingleLinkedList<T>::addToRear(T* element) {
     //Create a new node with element.
@@ -106,6 +110,10 @@ void SingleLinkedList<T>::addToRear(T* element) {
 	cout << "Added Element (" << *element << ") to the rear (Add to rear method)." << endl;
 }
 
+/*
+* Adds an element to the rear of a list and sets tail to new element.
+* element - Element to be added to the rear.
+*/
 template <class T>
 void SingleLinkedList<T>::add(T* element) {
     Node<T>* node = new Node<T>(element, NULL);
