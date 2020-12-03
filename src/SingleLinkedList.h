@@ -207,6 +207,7 @@ void SingleLinkedList<T>::set(int index, T* element) {
 /*
 * Gets the element of the node that index corresponds to.
 * index - index of node carrying element you want to get
+* Throws a const char* exception if the input index is out of bounds
 */
 template <class T>
 T* SingleLinkedList<T>::get(int index) {
@@ -225,6 +226,7 @@ T* SingleLinkedList<T>::get(int index) {
 
 /*
 * Gets the element of the head node.
+* Throws a const char* exception if list is empty
 */
 template <class T>
 T* SingleLinkedList<T>::first() {
@@ -237,6 +239,7 @@ T* SingleLinkedList<T>::first() {
 
 /*
 * Gets the element of the tail node.
+* Throws a const char* exception if list is empty
 */
 template <class T>
 T* SingleLinkedList<T>::last() {
@@ -264,7 +267,7 @@ int SingleLinkedList<T>::indexOf(T* element) {
 		loc++;
 	}
 
-	cout << "Retriving index of Element (" << *element << ")." << endl;
+	cout << "Retrieving index of Element (" << *element << ")." << endl;
 	if (currentNode == NULL)
 		return -1;
 	else
