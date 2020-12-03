@@ -88,8 +88,8 @@ void SingleLinkedList<T>::addToFront(T* element) {
 }
 
 /*
-* Adds an element to the rear of a list and sets tail to new element.
-* element - Element to be added to the rear.
+* Adds an element to the rear of a list and assigns tail to it.
+* element - Element being added to rear of list.
 */
 template <class T>
 void SingleLinkedList<T>::addToRear(T* element) {
@@ -111,8 +111,8 @@ void SingleLinkedList<T>::addToRear(T* element) {
 }
 
 /*
-* Adds an element to the rear of a list and sets tail to new element.
-* element - Element to be added to the rear.
+* Adds an element to the rear of a list and assigns tail to it.
+* element - Element being added to rear of list.
 */
 template <class T>
 void SingleLinkedList<T>::add(T* element) {
