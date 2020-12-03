@@ -8,7 +8,7 @@ template <class T>
 struct Node {
 	T* data;
 	Node<T>* next;
-	
+
 	Node(T* element, Node<T>* next) {
 		this->data = element;
 		this->next = next;
@@ -25,14 +25,14 @@ private:
 public:
 	//Constructor
 	SingleLinkedList();
-	
+
 	//Adding
 	void addToFront(T* element);
 	void addToRear(T* element);
 	void add(T* element);
 	void add(int index, T* element);
 	void addAfter(T* element, T* target);
-	
+
 	//Removing
 	T* removeFirst();
 	T* removeLast();
@@ -87,14 +87,47 @@ void SingleLinkedList<T>::addToFront(T* element) {
 	cout << "Added Element (" << *element << ") to the front." << endl;
 }
 
+/*
+* Adds an element to the rear of a list and assigns tail to it.
+* element - Element being added to rear of list.
+*/
 template <class T>
 void SingleLinkedList<T>::addToRear(T* element) {
-	cout << "Added Element (" << *element << ") to the rear." << endl;
+    //Create a new node with element.
+    Node<T>* node = new Node<T>(element, NULL);
+    //Check to see if the list is empty, if so, set head as node.
+    if(size == 0) {
+        head = node;
+        tail = head;
+    //If not, set the tails next node as the new node
+    } else {
+        tail->next = node;
+    }
+
+    //Move the tail to the new node and increase the size by 1.
+    tail = node;
+    size++;
+	cout << "Added Element (" << *element << ") to the rear (Add to rear method)." << endl;
 }
 
+/*
+* Adds an element to the rear of a list and assigns tail to it.
+* element - Element being added to rear of list.
+*/
 template <class T>
 void SingleLinkedList<T>::add(T* element) {
-	cout << "Added Element (" << *element << ") to the rear." << endl;
+    Node<T>* node = new Node<T>(element, NULL);
+
+    if(size == 0) {
+        head = node;
+        tail = head;
+    } else {
+        tail->next = node;
+    }
+
+    tail = node;
+    size++;
+	cout << "Added Element (" << *element << ") to the rear (Add method)." << endl;
 }
 
 template <class T>
@@ -106,7 +139,7 @@ void SingleLinkedList<T>::add(int index, T* element) {
 * Adds an element after the target provided.
 * element - Element to add after target provided.
 * target - Target to add element after.
-* throws a const char* exception when the target 
+* throws a const char* exception when the target
 * isn't found within the list.
 */
 template <class T>
@@ -152,7 +185,7 @@ T* SingleLinkedList<T>::removeLast() {
 /*
 * Removes an element from the list.
 * element - Element to remove from the list.
-* Throws a const char* exception if list is empty 
+* Throws a const char* exception if list is empty
 * or element wasn't found in the list.
 */
 template <class T>
