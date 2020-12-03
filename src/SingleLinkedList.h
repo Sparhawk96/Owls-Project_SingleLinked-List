@@ -8,7 +8,7 @@ template <class T>
 struct Node {
 	T* data;
 	Node<T>* next;
-	
+
 	Node(T* element, Node<T>* next) {
 		this->data = element;
 		this->next = next;
@@ -25,14 +25,14 @@ private:
 public:
 	//Constructor
 	SingleLinkedList();
-	
+
 	//Adding
 	void addToFront(T* element);
 	void addToRear(T* element);
 	void add(T* element);
 	void add(int index, T* element);
 	void addAfter(T* element, T* target);
-	
+
 	//Removing
 	T* removeFirst();
 	T* removeLast();
@@ -106,7 +106,7 @@ void SingleLinkedList<T>::add(int index, T* element) {
 * Adds an element after the target provided.
 * element - Element to add after target provided.
 * target - Target to add element after.
-* throws a const char* exception when the target 
+* throws a const char* exception when the target
 * isn't found within the list.
 */
 template <class T>
@@ -152,7 +152,7 @@ T* SingleLinkedList<T>::removeLast() {
 /*
 * Removes an element from the list.
 * element - Element to remove from the list.
-* Throws a const char* exception if list is empty 
+* Throws a const char* exception if list is empty
 * or element wasn't found in the list.
 */
 template <class T>
@@ -204,22 +204,47 @@ void SingleLinkedList<T>::set(int index, T* element) {
 
 /* Get methods */
 
+/*
+* Gets the element of the node that index corresponds to.
+* index - index of node carrying element you want to get
+*/
 template <class T>
 T* SingleLinkedList<T>::get(int index) {
-	cout << "Retriving Element from index: " << index << endl;
-	return NULL;
+    if(index < 0 || index >= size) {
+        throw "ERROR: Index is out of bounds.";
+    }
+
+    Node<T>* node = head;
+
+    for(int i = 0; i < index; i++) {
+        node = node->next;
+    }
+	cout << "Retrieving Element from index: " << index << endl;
+	return node->data;
 }
 
+/*
+* Gets the element of the head node.
+*/
 template <class T>
 T* SingleLinkedList<T>::first() {
-	cout << "Retriving the first Element." << endl;
-	return NULL;
+    if(isEmpty) {
+        throw "ERROR: List is empty.";
+    }
+	cout << "Retrieving the first Element." << endl;
+	return head->data;
 }
 
+/*
+* Gets the element of the tail node.
+*/
 template <class T>
 T* SingleLinkedList<T>::last() {
-	cout << "Retriving the last Element." << endl;
-	return NULL;
+    if(isEmpty) {
+        throw "ERROR: List is empty.";
+    }
+	cout << "Retrieving the last Element." << endl;
+	return tail->data;
 }
 
 /* Misc methods */
