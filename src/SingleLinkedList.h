@@ -236,6 +236,7 @@ T* SingleLinkedList<T>::remove(int index) {
 		if(size == 1){
 			tail = NULL;
 		}
+		delete next;
 	} else {
 		Node<T>* current = head;
 		for(int i = 0; i < index-1; i++){
@@ -248,6 +249,8 @@ T* SingleLinkedList<T>::remove(int index) {
 			tail = current;
 		}
 		element = next->data;
+		delete current;
+		delete next;
 	}
 	size--;
 	cout << "Removed Element at index: " << index << endl;
@@ -267,6 +270,7 @@ void SingleLinkedList<T>::set(int index, T* element) {
 		node = node->next;
 	}
 	node->data = element;
+	delete node;
 }
 
 /* Get methods */
