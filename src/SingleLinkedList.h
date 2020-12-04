@@ -328,7 +328,6 @@ bool SingleLinkedList<T>::contains(T* element) {
 	
 			
 		}
-		delete currentNode; 
 		currentNode = currentNode->next; //Move	
 	}
 	
@@ -343,9 +342,8 @@ bool SingleLinkedList<T>::contains(T* element) {
 
 template <class T>
 bool SingleLinkedList<T>::isEmpty() {
-	if (size == 0){
-    	cout << "List is empty." << endl;
-	    return true;
+	cout << "List is empty." << endl;
+	    return size == 0;
     }
 }
 
