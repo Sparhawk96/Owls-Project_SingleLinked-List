@@ -233,6 +233,14 @@ T* SingleLinkedList<T>::remove(int index) {
 template <class T>
 void SingleLinkedList<T>::set(int index, T* element) {
 	cout << "Set Element (" << *element << ") at index: " << index << endl;
+	if(index < 0 || index >= size) {
+		throw "ERROR: Invalid index.";
+	}
+	Node<T>* node = head;
+	for(int i = 0; i < index ; i++) {
+		node = node->next;
+	}
+	node->data = element;
 }
 
 /* Get methods */
