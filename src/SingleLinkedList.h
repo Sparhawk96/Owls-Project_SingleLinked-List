@@ -224,8 +224,34 @@ T* SingleLinkedList<T>::remove(T* element) {
 
 template <class T>
 T* SingleLinkedList<T>::remove(int index) {
+	if(index < 0 || index >= count) {
+		throw "ERROR: invalid index."
+	}
+	T* element;
+	if(index == 0){
+		item = head->data;
+		Node<T>* next = head->next;
+		head->next = NULL;
+		head = next;
+		if(size == 1){
+			tail = NULL;
+		}
+	} else {
+		Node<T>* current = head;
+		for(int i = 0; i < index-1; i++){
+			current = current->next;
+		}
+		Node<T>* next = current->next;
+		current->next = next->next;
+		next->next = NULL;
+		if(index == size-1){
+			tail = current;
+		}
+		element = next->data;
+	}
+	size--;
 	cout << "Removed Element at index: " << index << endl;
-	return NULL;
+	return element;
 }
 
 /* Set method */
