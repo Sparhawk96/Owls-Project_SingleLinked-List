@@ -336,7 +336,6 @@ void SingleLinkedList<T>::set(int index, T* element) {
 	}
 	delete (node->data);
 	node->data = element;
-	delete node;
 }
 
 /* Get methods */
