@@ -208,7 +208,9 @@ T* SingleLinkedList<T>::removeFirst() {
 	head = head->next;
 	size--;
 	cout << "Removed the first Element." << endl;
-	return placeHolder->data;
+	T* element = placeHolder->data;
+	delete placeHolder;
+	return element;
 }
 
 /* 
@@ -236,7 +238,9 @@ T* SingleLinkedList<T>::removeLast() {
 		tail = currentNode;
 		size--;
 		cout << "Removed the last Element." << endl;
-		return placeHolder->data;
+		T* element = placeHolder->data;
+		delete placeHolder;
+		return element;
 	}
 }
 
@@ -303,8 +307,10 @@ T* SingleLinkedList<T>::remove(int index) {
 		Node<T>* placeHolder = currentNode->next;
 		currentNode->next = currentNode->next->next;
 		size--;
-
-		return placeHolder->data;
+		T* element = placeHolder->data
+		delete placeHolder;
+		delete currentNode;
+		return element;
 	}
 }
 
