@@ -344,7 +344,7 @@ template <class T>
 bool SingleLinkedList<T>::isEmpty() {
 	cout << "List is empty." << endl;
 	    return size == 0;
-    }
+    
 }
 
 /* Gets the current size of the single linked list.
