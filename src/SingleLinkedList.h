@@ -237,22 +237,50 @@ void SingleLinkedList<T>::set(int index, T* element) {
 
 /* Get methods */
 
+/*
+* Gets the element of the node that index corresponds to.
+* index - index of node carrying element you want to get
+* Throws a const char* exception if the input index is out of bounds
+*/
 template <class T>
 T* SingleLinkedList<T>::get(int index) {
-	cout << "Retriving Element from index: " << index << endl;
-	return NULL;
+    if(index < 0 || index >= size) {
+        throw "ERROR: Index is out of bounds.";
+    }
+
+    Node<T>* node = head;
+
+    for(int i = 0; i < index; i++) {
+        node = node->next;
+    }
+	cout << "Retrieving Element from index: " << index << endl;
+	return node->data;
 }
 
+/*
+* Gets the element of the head node.
+* Throws a const char* exception if list is empty
+*/
 template <class T>
 T* SingleLinkedList<T>::first() {
-	cout << "Retriving the first Element." << endl;
-	return NULL;
+    if(isEmpty) {
+        throw "ERROR: List is empty.";
+    }
+	cout << "Retrieving the first Element." << endl;
+	return head->data;
 }
 
+/*
+* Gets the element of the tail node.
+* Throws a const char* exception if list is empty
+*/
 template <class T>
 T* SingleLinkedList<T>::last() {
-	cout << "Retriving the last Element." << endl;
-	return NULL;
+    if(isEmpty) {
+        throw "ERROR: List is empty.";
+    }
+	cout << "Retrieving the last Element." << endl;
+	return tail->data;
 }
 
 /* Misc methods */
@@ -272,7 +300,7 @@ int SingleLinkedList<T>::indexOf(T* element) {
 		loc++;
 	}
 
-	cout << "Retriving index of Element (" << *element << ")." << endl;
+	cout << "Retrieving index of Element (" << *element << ")." << endl;
 	if (currentNode == NULL)
 		return -1;
 	else
