@@ -224,12 +224,12 @@ T* SingleLinkedList<T>::remove(T* element) {
 
 template <class T>
 T* SingleLinkedList<T>::remove(int index) {
-	if(index < 0 || index >= count) {
-		throw "ERROR: invalid index."
+	if(index < 0 || index >= size) {
+		throw "ERROR: invalid index.";
 	}
 	T* element;
 	if(index == 0){
-		item = head->data;
+		element = head->data;
 		Node<T>* next = head->next;
 		head->next = NULL;
 		head = next;
