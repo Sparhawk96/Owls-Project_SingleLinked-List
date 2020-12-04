@@ -145,6 +145,7 @@ void SingleLinkedList<T>::add(int index, T* element) {
 		add(element);
 	} else if(index == 0){
 		Node<T>* newNode = new Node<T>(element, head);
+		newNode->next = head->next;
 		head = newNode;
 		size++;
 	} else {
@@ -226,6 +227,7 @@ T* SingleLinkedList<T>::removeLast() {
 	if(size ==1) {
 		tail = head = NULL;
 		size--;
+		delete currentNode;
 		return currentNode->data;
 	} else{
 		int currentIndex = 0;
@@ -309,7 +311,6 @@ T* SingleLinkedList<T>::remove(int index) {
 		size--;
 		T* element = placeHolder->data;
 		delete placeHolder;
-		delete currentNode;
 		return element;
 	}
 }
