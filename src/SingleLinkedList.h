@@ -263,7 +263,7 @@ T* SingleLinkedList<T>::get(int index) {
 */
 template <class T>
 T* SingleLinkedList<T>::first() {
-    if(isEmpty) {
+    if(isEmpty()) {
         throw "ERROR: List is empty.";
     }
 	cout << "Retrieving the first Element." << endl;
@@ -276,7 +276,7 @@ T* SingleLinkedList<T>::first() {
 */
 template <class T>
 T* SingleLinkedList<T>::last() {
-    if(isEmpty) {
+    if(isEmpty()) {
         throw "ERROR: List is empty.";
     }
 	cout << "Retrieving the last Element." << endl;
@@ -307,22 +307,56 @@ int SingleLinkedList<T>::indexOf(T* element) {
 		return loc;
 }
 
+/*
+*Looks in the list to see if the element is there
+*returns true if found else false
+*/
 template <class T>
 bool SingleLinkedList<T>::contains(T* element) {
-	cout << "List contains Element (" << *element << ")." << endl;
+	 
+     if(isEmpty()) {
+	    cout << "List does not contains Element (" << *element << ")." << endl;
+        return false;
+    }
+	
+	Node<T>* currentNode = head; //Are we at the start
+	
+	while (currentNode != NULL) {
+		if (*(currentNode->data) == *element){
+		    cout << "List contains Element (" << *element << ")." << endl;
+			return true;
+	
+			
+		}
+		delete currentNode; 
+		currentNode = currentNode->next; //Move	
+	}
+	
+	cout << "List does not contains Element (" << *element << ")." << endl;
 	return false;
 }
 
+/*
+* If current SLL size is 0 
+* return true 
+*/
+
 template <class T>
 bool SingleLinkedList<T>::isEmpty() {
-	cout << "List is empty." << endl;
-	return true;
+	if (size == 0){
+    	cout << "List is empty." << endl;
+	    return true;
+    }
 }
+
+/* Gets the current size of the single linked list.
+* returns the size that the list is.
+*/
 
 template <class T>
 int SingleLinkedList<T>::getSize() {
-	cout << "List size is 0." << endl;
-	return 0;
+	cout << "List size is " + size << endl;
+	return size;
 }
 
 /* Delete method */
