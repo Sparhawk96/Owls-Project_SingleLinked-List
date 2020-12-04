@@ -130,6 +130,12 @@ void SingleLinkedList<T>::add(T* element) {
 	cout << "Added Element (" << *element << ") to the rear (Add method)." << endl;
 }
 
+/*
+* Inserts an element at given index, pushing following elements back.
+* index - position in list to insert element.
+* element - object or value or be inserted.
+* Throws exception of index is invalid.
+*/
 template <class T>
 void SingleLinkedList<T>::add(int index, T* element) {
 	if(index < 0 || index > size){
@@ -189,7 +195,10 @@ void SingleLinkedList<T>::addAfter(T* element, T* target) {
 }
 
 /* Removing methods */
-
+/* 
+* Removes first element in list.
+* Throws exception if list is empty.
+*/
 template <class T>
 T* SingleLinkedList<T>::removeFirst() {
 	if(size == 0){
@@ -202,6 +211,10 @@ T* SingleLinkedList<T>::removeFirst() {
 	return placeHolder->data;
 }
 
+/* 
+* Removes the last element from the list
+* Throws exception if list is empty.
+*/
 template <class T>
 T* SingleLinkedList<T>::removeLast() {
 	Node<T>* currentNode = head;
@@ -267,6 +280,11 @@ T* SingleLinkedList<T>::remove(T* element) {
 	}
 }
 
+/*
+* Removes the element at a given index from the list.
+* index- position in list of the element to be removed. 
+* Throws exception if index in invalid.
+*/
 template <class T>
 T* SingleLinkedList<T>::remove(int index) {
 	if(index < 0 || index >= size) {
@@ -285,11 +303,18 @@ T* SingleLinkedList<T>::remove(int index) {
 		Node<T>* placeHolder = currentNode->next;
 		currentNode->next = currentNode->next->next;
 		size--;
+
 		return placeHolder->data;
 	}
 }
 
 /* Set method */
+/*
+*Sets the element of the given index to the given element.
+* index- index of element to be set.
+* element- value or object to be set. 
+* Throws exception if index is invalid.
+*/ 
 
 template <class T>
 void SingleLinkedList<T>::set(int index, T* element) {
