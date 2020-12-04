@@ -172,8 +172,16 @@ void SingleLinkedList<T>::addAfter(T* element, T* target) {
 
 template <class T>
 T* SingleLinkedList<T>::removeFirst() {
+	if(size == 0){
+		throw "ERROR: list is empty.";
+	}
+	T* element = head->data;
+	Node<T>* next = head->next;
+	head->next = NULL;
+	head = next;
+	size--;
 	cout << "Removed the first Element." << endl;
-	return NULL;
+	return element;
 }
 
 template <class T>
