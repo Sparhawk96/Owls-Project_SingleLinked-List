@@ -195,23 +195,36 @@ T* SingleLinkedList<T>::removeFirst() {
 	if(size == 0){
 		throw "ERROR: list is empty.";
 	}
-	T* element = head->data;
-	Node<T>* next = head->next;
-	head->next = NULL;
-	head = next;
+	Node<T>* placeHolder = head;
+	head = head->next;
 	size--;
 	cout << "Removed the first Element." << endl;
-	return element;
+	return placeHolder->data;
 }
 
 template <class T>
 T* SingleLinkedList<T>::removeLast() {
+	Node<T>* currentNode = head;
 	if(size == 0){
 		throw "ERROR: list is empty.";
 	}
-	T* element = remove(size-1);
-	cout << "Removed the last Element." << endl;
-	return element;
+	if(size ==1) {
+		tail = head = NULL;
+		size--;
+		return currentNode->data;
+	} else{
+		int currentIndex = 0;
+		while (currentIndex < size -2){
+			currentNode = currentNode->next;
+			currentIndex++;
+		}
+		Node<T>* placeHolder = tail;
+		currentNode->next = NULL;
+		tail = currentNode;
+		size--;
+		cout << "Removed the last Element." << endl;
+		return placeHolder->data;
+	}
 }
 
 /*
@@ -256,37 +269,24 @@ T* SingleLinkedList<T>::remove(T* element) {
 
 template <class T>
 T* SingleLinkedList<T>::remove(int index) {
-	if(index < 0 || index > size) {
+	if(index < 0 || index >= size) {
 		throw "ERROR: invalid index.";
-	}
-	T* element;
-	if(index == 0){
-		element = head->data;
-		Node<T>* next = head->next;
-		head->next = NULL;
-		head = next;
-		if(size == 1){
-			tail = NULL;
-		}
-		delete next;
+	} else if (index == 0){
+		return removeFirst();
+	} else if (index == size-1){
+		return removeLast();
 	} else {
-		Node<T>* current = head;
-		for(int i = 0; i < index-1; i++){
-			current = current->next;
+		Node<T>* currentNode = head;
+		int currentIndex = 0;
+		while(currentIndex != index-1){
+			currentNode = currentNode->next;
+			currentIndex++;
 		}
-		Node<T>* next = current->next;
-		current->next = next->next;
-		next->next = NULL;
-		if(index == size-1){
-			tail = current;
-		}
-		element = next->data;
-		delete current;
-		delete next;
+		Node<T>* placeHolder = currentNode->next;
+		currentNode->next = currentNode->next->next;
+		size--;
+		return placeHolder->data;
 	}
-	size--;
-	cout << "Removed Element at index: " << index << endl;
-	return element;
 }
 
 /* Set method */
