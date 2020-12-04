@@ -146,7 +146,7 @@ void SingleLinkedList<T>::add(int index, T* element) {
 		for(int i =0; i < index-1; i++){
 			current = current->next;
 		}
-		Node<T>* newNode = new Node<T>*(element, NULL);
+		Node<T>* newNode = new Node<T>(element, NULL);
 		Node<T>* temp = current->next;
 		current->next = newNode;
 		newNode->next = temp;
