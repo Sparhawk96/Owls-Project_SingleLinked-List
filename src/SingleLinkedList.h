@@ -52,6 +52,7 @@ public:
 	bool contains(T* element);
 	bool isEmpty();
 	int getSize();
+	void print();
 
 	//Delete
 	~SingleLinkedList();
@@ -64,7 +65,6 @@ SingleLinkedList<T>::SingleLinkedList() {
 	this->size = 0;
 	this->head = NULL;
 	this->tail = NULL;
-	cout << "Created a List" << endl;
 };
 
 /* Adding methods */
@@ -84,7 +84,6 @@ void SingleLinkedList<T>::addToFront(T* element) {
 	}
 
 	size++;
-	cout << "Added Element (" << *element << ") to the front." << endl;
 }
 
 /*
@@ -93,21 +92,21 @@ void SingleLinkedList<T>::addToFront(T* element) {
 */
 template <class T>
 void SingleLinkedList<T>::addToRear(T* element) {
-    //Create a new node with element.
-    Node<T>* node = new Node<T>(element, NULL);
-    //Check to see if the list is empty, if so, set head as node.
-    if(size == 0) {
-        head = node;
-        tail = head;
-    //If not, set the tails next node as the new node
-    } else {
-        tail->next = node;
-    }
+	//Create a new node with element.
+	Node<T>* node = new Node<T>(element, NULL);
+	//Check to see if the list is empty, if so, set head as node.
+	if (size == 0) {
+		head = node;
+		tail = head;
+		//If not, set the tails next node as the new node
+	}
+	else {
+		tail->next = node;
+	}
 
-    //Move the tail to the new node and increase the size by 1.
-    tail = node;
-    size++;
-	cout << "Added Element (" << *element << ") to the rear (Add to rear method)." << endl;
+	//Move the tail to the new node and increase the size by 1.
+	tail = node;
+	size++;
 }
 
 /*
@@ -116,18 +115,18 @@ void SingleLinkedList<T>::addToRear(T* element) {
 */
 template <class T>
 void SingleLinkedList<T>::add(T* element) {
-    Node<T>* node = new Node<T>(element, NULL);
+	Node<T>* node = new Node<T>(element, NULL);
 
-    if(size == 0) {
-        head = node;
-        tail = head;
-    } else {
-        tail->next = node;
-    }
+	if (size == 0) {
+		head = node;
+		tail = head;
+	}
+	else {
+		tail->next = node;
+	}
 
-    tail = node;
-    size++;
-	cout << "Added Element (" << *element << ") to the rear (Add method)." << endl;
+	tail = node;
+	size++;
 }
 
 /*
@@ -138,19 +137,21 @@ void SingleLinkedList<T>::add(T* element) {
 */
 template <class T>
 void SingleLinkedList<T>::add(int index, T* element) {
-	if(index < 0 || index > size){
+	if (index < 0 || index > size) {
 		throw "ERROR: invalid index.";
 	}
-	if(index == size){
+	if (index == size) {
 		add(element);
-	} else if(index == 0){
+	}
+	else if (index == 0) {
 		Node<T>* newNode = new Node<T>(element, head);
 		newNode->next = head;
 		head = newNode;
 		size++;
-	} else {
+	}
+	else {
 		Node<T>* current = head;
-		for(int i =0; i < index-1; i++){
+		for (int i = 0; i < index - 1; i++) {
 			current = current->next;
 		}
 		Node<T>* newNode = new Node<T>(element, NULL);
@@ -159,7 +160,6 @@ void SingleLinkedList<T>::add(int index, T* element) {
 		newNode->next = temp;
 		size++;
 	}
-	cout << "Added Element (" << *element << ") after this index: " << index << endl;
 }
 
 /*
@@ -191,48 +191,46 @@ void SingleLinkedList<T>::addAfter(T* element, T* target) {
 
 	if (currentNode == tail)
 		tail = newNode;
-
-	cout << "Added Element (" << *element << ") after: " << *target << endl;
 }
 
 /* Removing methods */
-/* 
+/*
 * Removes first element in list.
 * Throws exception if list is empty.
 */
 template <class T>
 T* SingleLinkedList<T>::removeFirst() {
-	if(size == 0){
+	if (size == 0) {
 		throw "ERROR: list is empty.";
 	}
 	Node<T>* placeHolder = head;
 	head = head->next;
 	size--;
-	cout << "Removed the first Element." << endl;
 	T* element = placeHolder->data;
 	delete placeHolder;
 	return element;
 }
 
-/* 
+/*
 * Removes the last element from the list
 * Throws exception if list is empty.
 */
 template <class T>
 T* SingleLinkedList<T>::removeLast() {
 	Node<T>* currentNode = head;
-	if(size == 0){
+	if (size == 0) {
 		throw "ERROR: list is empty.";
 	}
-	if(size ==1) {
+	if (size == 1) {
 		tail = head = NULL;
 		size--;
 		T* placeHolder = currentNode->data;
 		delete currentNode;
 		return placeHolder;
-	} else{
+	}
+	else {
 		int currentIndex = 0;
-		while (currentIndex < size -2){
+		while (currentIndex < size - 2) {
 			currentNode = currentNode->next;
 			currentIndex++;
 		}
@@ -240,7 +238,6 @@ T* SingleLinkedList<T>::removeLast() {
 		currentNode->next = NULL;
 		tail = currentNode;
 		size--;
-		cout << "Removed the last Element." << endl;
 		T* element = placeHolder->data;
 		delete placeHolder;
 		return element;
@@ -257,11 +254,14 @@ template <class T>
 T* SingleLinkedList<T>::remove(T* element) {
 	if (size == 0) {
 		throw "ERROR: List is Empty.";
-	}else if (*(head->data) == *element) {
+	}
+	else if (*(head->data) == *element) {
 		return removeFirst();
-	}else if (*(tail->data) == *element) {
+	}
+	else if (*(tail->data) == *element) {
 		return removeLast();
-	}else {
+	}
+	else {
 		Node<T>* currentNode = head;
 		bool foundIt = false;
 
@@ -282,28 +282,30 @@ T* SingleLinkedList<T>::remove(T* element) {
 		currentNode->next = currentNode->next->next;
 		delete remove;
 
-		cout << "Removed Element (" << *element << ") from list." << endl;
 		return placeHolder;
 	}
 }
 
 /*
 * Removes the element at a given index from the list.
-* index- position in list of the element to be removed. 
+* index- position in list of the element to be removed.
 * Throws exception if index in invalid.
 */
 template <class T>
 T* SingleLinkedList<T>::remove(int index) {
-	if(index < 0 || index >= size) {
+	if (index < 0 || index >= size) {
 		throw "ERROR: invalid index.";
-	} else if (index == 0){
+	}
+	else if (index == 0) {
 		return removeFirst();
-	} else if (index == size-1){
+	}
+	else if (index == size - 1) {
 		return removeLast();
-	} else {
+	}
+	else {
 		Node<T>* currentNode = head;
 		int currentIndex = 0;
-		while(currentIndex != index-1){
+		while (currentIndex != index - 1) {
 			currentNode = currentNode->next;
 			currentIndex++;
 		}
@@ -320,18 +322,17 @@ T* SingleLinkedList<T>::remove(int index) {
 /*
 *Sets the element of the given index to the given element.
 * index- index of element to be set.
-* element- value or object to be set. 
+* element- value or object to be set.
 * Throws exception if index is invalid.
-*/ 
+*/
 
 template <class T>
 void SingleLinkedList<T>::set(int index, T* element) {
-	cout << "Set Element (" << *element << ") at index: " << index << endl;
-	if(index < 0 || index >= size) {
+	if (index < 0 || index >= size) {
 		throw "ERROR: Invalid index.";
 	}
 	Node<T>* node = head;
-	for(int i = 0; i < index ; i++) {
+	for (int i = 0; i < index; i++) {
 		node = node->next;
 	}
 	delete (node->data);
@@ -347,16 +348,15 @@ void SingleLinkedList<T>::set(int index, T* element) {
 */
 template <class T>
 T* SingleLinkedList<T>::get(int index) {
-    if(index < 0 || index >= size) {
-        throw "ERROR: Index is out of bounds.";
-    }
+	if (index < 0 || index >= size) {
+		throw "ERROR: Index is out of bounds.";
+	}
 
-    Node<T>* node = head;
+	Node<T>* node = head;
 
-    for(int i = 0; i < index; i++) {
-        node = node->next;
-    }
-	cout << "Retrieving Element from index: " << index << endl;
+	for (int i = 0; i < index; i++) {
+		node = node->next;
+	}
 	return node->data;
 }
 
@@ -366,10 +366,9 @@ T* SingleLinkedList<T>::get(int index) {
 */
 template <class T>
 T* SingleLinkedList<T>::first() {
-    if(isEmpty()) {
-        throw "ERROR: List is empty.";
-    }
-	cout << "Retrieving the first Element." << endl;
+	if (isEmpty()) {
+		throw "ERROR: List is empty.";
+	}
 	return head->data;
 }
 
@@ -379,10 +378,9 @@ T* SingleLinkedList<T>::first() {
 */
 template <class T>
 T* SingleLinkedList<T>::last() {
-    if(isEmpty()) {
-        throw "ERROR: List is empty.";
-    }
-	cout << "Retrieving the last Element." << endl;
+	if (isEmpty()) {
+		throw "ERROR: List is empty.";
+	}
 	return tail->data;
 }
 
@@ -398,12 +396,11 @@ int SingleLinkedList<T>::indexOf(T* element) {
 	Node<T>* currentNode = head;
 	int loc = 0;
 
-	while (currentNode != NULL  && *(currentNode->data) != *element) {
+	while (currentNode != NULL && *(currentNode->data) != *element) {
 		currentNode = currentNode->next;
 		loc++;
 	}
 
-	cout << "Retrieving index of Element (" << *element << ")." << endl;
 	if (currentNode == NULL)
 		return -1;
 	else
@@ -416,38 +413,31 @@ int SingleLinkedList<T>::indexOf(T* element) {
 */
 template <class T>
 bool SingleLinkedList<T>::contains(T* element) {
-	 
-     if(isEmpty()) {
-	    cout << "List does not contains Element (" << *element << ")." << endl;
-        return false;
-    }
-	
+
+	if (isEmpty()) {
+		return false;
+	}
+
 	Node<T>* currentNode = head; //Are we at the start
-	
+
 	while (currentNode != NULL) {
-		if (*(currentNode->data) == *element){
-		    cout << "List contains Element (" << *element << ")." << endl;
+		if (*(currentNode->data) == *element) {
 			return true;
-	
-			
 		}
 		currentNode = currentNode->next; //Move	
 	}
-	
-	cout << "List does not contains Element (" << *element << ")." << endl;
+
 	return false;
 }
 
 /*
-* If current SLL size is 0 
-* return true 
+* If current SLL size is 0
+* return true
 */
 
 template <class T>
 bool SingleLinkedList<T>::isEmpty() {
-	cout << "List is empty." << endl;
-	    return size == 0;
-    
+	return size == 0;
 }
 
 /* Gets the current size of the single linked list.
@@ -456,8 +446,25 @@ bool SingleLinkedList<T>::isEmpty() {
 
 template <class T>
 int SingleLinkedList<T>::getSize() {
-	cout << "List size is " + size << endl;
 	return size;
+}
+
+/*
+* Prints the List to stdout in the following
+* format [ ?, ..., ?]
+*/
+template <class T>
+void SingleLinkedList<T>::print() {
+	if (isEmpty())
+		cout << "[]" << endl;
+	else {
+		Node<T>* node = head;
+		cout << "[" << *(node->data);
+		while ((node = node->next) != NULL)
+			cout << ", " << *(node->data);
+
+		cout << "]" << endl;
+	}
 }
 
 /* Delete method */
@@ -474,7 +481,6 @@ SingleLinkedList<T>::~SingleLinkedList() {
 		delete prev->data;
 		delete prev;
 	}
-	cout << "List is being destroyed" << endl;
 }
 
 #endif // !SINGLE_LINKED_LIST_H
