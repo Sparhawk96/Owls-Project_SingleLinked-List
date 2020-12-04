@@ -307,7 +307,7 @@ T* SingleLinkedList<T>::remove(int index) {
 		Node<T>* placeHolder = currentNode->next;
 		currentNode->next = currentNode->next->next;
 		size--;
-		T* element = placeHolder->data
+		T* element = placeHolder->data;
 		delete placeHolder;
 		delete currentNode;
 		return element;
