@@ -132,6 +132,26 @@ void SingleLinkedList<T>::add(T* element) {
 
 template <class T>
 void SingleLinkedList<T>::add(int index, T* element) {
+	if(index < 0 || index > size){
+		throw "ERROR: invalid index.";
+	}
+	if(index == size){
+		add(element);
+	} else if(index == 0){
+		Node<T>* newNode = new Node<T>(element, head);
+		head = newNode;
+		size++;
+	} else {
+		Node<T>* current = head;
+		for(int i =0; i < index-1; i++){
+			current = current->next;
+		}
+		Node<T>* newNode = new Node<T>*(element, NULL);
+		Node<T>* temp = current->next;
+		current->next = newNode;
+		newNode->next = temp;
+		size++;
+	}
 	cout << "Added Element (" << *element << ") after this index: " << index << endl;
 }
 
@@ -186,8 +206,12 @@ T* SingleLinkedList<T>::removeFirst() {
 
 template <class T>
 T* SingleLinkedList<T>::removeLast() {
+	if(size == 0){
+		throw "ERROR: list is empty.";
+	}
+	T* element = remove(size-1);
 	cout << "Removed the last Element." << endl;
-	return NULL;
+	return element;
 }
 
 /*
@@ -232,7 +256,7 @@ T* SingleLinkedList<T>::remove(T* element) {
 
 template <class T>
 T* SingleLinkedList<T>::remove(int index) {
-	if(index < 0 || index >= size) {
+	if(index < 0 || index > size) {
 		throw "ERROR: invalid index.";
 	}
 	T* element;
